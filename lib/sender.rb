@@ -44,11 +44,11 @@ service.authorization = authorize
 # Création du contenu du message
 msg = Mail.new #msg est une instance de la classe « Mail ». On va définir ses variables d’instance
 msg.date = Time.now
-msg.subject = 'I proudly made a Robot able to send emails ;)'
+msg.subject = 'Robot-rement il est en bombe'
 msg.body = Text.new('Signé Noé. AKA futur Hackeur en devenir..', 'plain', 'charset' => 'us-ascii')
 msg.from = {'noemargeek@gmail.com' => 'Robot'}
 msg.to   = {[
-    'noe.marguillard@sfr.fr', 'vincent.leparoux@gmail.com'] => nil,
+    'noe.marguillard@sfr.fr', 'jeanne.pelisson@essec.edu'] => nil,
 }
 
 # Création de la requête, insertion du contenu dans la propriété `raw`
