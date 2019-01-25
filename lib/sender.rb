@@ -12,13 +12,11 @@ CREDENTIALS_PATH = 'credentials.json'.freeze
 # created automatically when the authorization flow completes for the first
 # time.
 TOKEN_PATH = 'token.yaml'.freeze
-SCOPE = Google::Apis::GmailV1::AUTH_SCOPE
+SCOPE = Google::Apis::GmailV1::AUTH_SCOPE # changer read only en SCOPE
 
-##
 # Ensure valid credentials, either by restoring from the saved credentials
 # files or intitiating an OAuth2 authorization. If authorization is required,
 # the user's default browser will be launched to approve the request.
-#
 # @return [Google::Auth::UserRefreshCredentials] OAuth2 credentials
 def authorize
   client_id = Google::Auth::ClientId.from_file(CREDENTIALS_PATH)
@@ -43,19 +41,17 @@ service = Google::Apis::GmailV1::GmailService.new
 service.client_options.application_name = APPLICATION_NAME
 service.authorization = authorize
 
-
 # Création du contenu du message
 msg = Mail.new #msg est une instance de la classe « Mail ». On va définir ses variables d’instance
 msg.date = Time.now
-msg.subject = 'ceci est un test'
-msg.body = Text.new('coucou!', 'plain', 'charset' => 'us-ascii')
-msg.from = {'coucous@gmail.com' => 'Coucou Man'}
-msg.to   = {
-    'merguez@gmail.com' => nil,
+msg.subject = 'I proudly made a Robot able to send emails ;)'
+msg.body = Text.new('Signé Noé. AKA futur Hackeur en devenir..', 'plain', 'charset' => 'us-ascii')
+msg.from = {'noemargeek@gmail.com' => 'Robot'}
+msg.to   = {[
+    'noe.marguillard@sfr.fr', 'vincent.leparoux@gmail.com'] => nil,
 }
 
 # Création de la requête, insertion du contenu dans la propriété `raw`
 #(https://developers.google.com/gmail/api/v1/reference/users/messages/send)
 message = Google::Apis::GmailV1::Message.new(raw: msg.to_s)
-
 service.send_user_message('me', message)
