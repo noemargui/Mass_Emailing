@@ -36,8 +36,8 @@ class Scrapper
 			page.xpath("/html/body/div/main/section[2]/div/table/tbody/tr[4]/td[2]").each do |email|
 				townhall_email << email.text
 			end	
-			return townhall_email
 		end
+		return townhall_email
 	end
 
 	def get_townhall_department(townhall_url) # ici on récupère les emails, grâce aux urls en placés en paramètres
